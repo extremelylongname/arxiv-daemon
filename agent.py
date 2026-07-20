@@ -20,7 +20,7 @@ with open('prompt.txt', 'r', encoding='utf-8') as f:
     prompt = f.read()
 
 json_catcher = re.compile(r"\\[(.*?)\\]")
-message = email_fetcher.fetch_arxiv_email(72)
+message = email_fetcher.fetch_arxiv_email(24)
 tot = ''
 for email in message:
 	tot += email
