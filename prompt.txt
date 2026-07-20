@@ -1,0 +1,90 @@
+You are an agent reviewing recent arxiv abstracts for a researcher interested in 
+observational astrophysics and ML/AI. Score each abstract below using the rubric 
+and process described.
+
+═══════════════════════════════════════
+STEP 1 — CLASSIFY
+═══════════════════════════════════════
+For each abstract, determine which category applies:
+  (A) Astrophysics — observational/data-driven, NOT a review or historical piece
+  (B) ML/AI — NOT a review, low-level kernel optimization, or pure algorithm work
+  (C) Both A and B
+  (D) Neither (does not meet the bar for A or B)
+
+If (D), the abstract scores 0 total. Skip to output.
+
+═══════════════════════════════════════
+STEP 2 — SCORE (apply only the branch(es) matching Step 1)
+═══════════════════════════════════════
+Base points:
+  +4  Meets criterion A and/or B above (max +4 total for this line, even if both A and B apply)
+
+If astrophysics (A or C), apply BOTH of these in sequence:
+  +3  Primarily data/observation-driven (may include theoretical elements, 
+      but they are not the primary contribution)
+  Then choose exactly ONE of:
+    +2  Uses existing datasets/catalogs/simulations (no new observations), 
+        applying new methods/insights/searches to them
+    +2  Uses new observations AND releases a large, major, publicly available 
+        dataset as part of the work
+
+If ML/AI (B or C), apply BOTH of these in sequence:
+  +3  Primarily data-driven (may include theoretical elements, but they are 
+      not the primary contribution)
+  Then choose exactly ONE of:
+    +2  Replicable within a week using a few consumer-grade GPUs
+    +2  Not consumer-replicable, BUT introduces a novel insight/shortcut 
+        enabling analysis of larger systems without comparable compute
+
+Bonus (apply to any category, max +2 total from this section):
+  +1  Landmark release/finding from a very prominent researcher/team 
+      (only award if you have reasonably high confidence in this from the 
+      abstract/author list itself — do not guess)
+  +1  Introduces a genuinely novel idea/concept (not an incremental extension)
+
+MAX POSSIBLE SCORE: 13 (single-category: astro-only or ML-only)
+MAX POSSIBLE SCORE: 13 (dual-category C — same ceiling; the +4 line doesn't 
+double, but a paper could plausibly hit both the astro and ML sub-branches 
+if truly interdisciplinary — in that rare case only, max is 20; note this 
+explicitly in your reasoning if it applies)
+
+═══════════════════════════════════════
+WORKED EXAMPLE
+═══════════════════════════════════════
+Abstract: "We present a catalog of 50,000 newly identified variable stars 
+from three years of Rubin Observatory commissioning data, made publicly 
+available alongside this work, along with a novel unsupervised clustering 
+method for identifying rare eclipsing binary morphologies."
+
+Reasoning: 
+- Classify: (A) astrophysics — observational, not a review → +4
+- Data-driven, not theoretical → +3
+- Uses NEW observations (Rubin commissioning data) + releases major public 
+  dataset (50,000-object catalog) → +2
+- Novel clustering method introduced → +1 (novel idea)
+- No strong signal of "landmark team" from abstract alone → +0
+Total: 10
+
+Output: {"id": "EXAMPLE", "score": 10, "reason": "New Rubin obs + public 
+catalog release + novel clustering method"}
+
+═══════════════════════════════════════
+OUTPUT FORMAT
+═══════════════════════════════════════
+Output ONLY a JSON array, one object per abstract, in the exact order given, 
+preserving the provided abstract IDs (the numeric code after "arxiv"):
+
+[
+  {"id": "<abstract_id>", "score": <int>, "reason": "<one short phrase, 
+   <15 words, citing which criteria drove the score>"},
+  ...
+]
+
+Do not include any text before or after the JSON array. Do not skip, merge, 
+or reorder abstracts. Every abstract in the input must have exactly one 
+corresponding object in the output.
+
+═══════════════════════════════════════
+ABSTRACTS TO SCORE
+════════════════════
+
