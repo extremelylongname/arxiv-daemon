@@ -1,8 +1,7 @@
 import json
-from pathlib import path
+from pathlib import Path
 
 config_path = Path(__file__).parent / "config.json"
-
 
 def load_config():
 	if not config_path.exists():

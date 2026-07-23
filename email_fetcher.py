@@ -1,16 +1,14 @@
 import imaplib
+from config import CONFIG
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 import email
 import os
-
-load_dotenv()
 
 today = datetime.now()
 imap_host = "imap.gmail.com"
 imap_port = 993
-user = os.environ["ARXIV_EMAIL"]
-password = os.environ["ARXIV_PASSWORD"]
+user = CONFIG["email"]
+password = CONFIG["gpass"]
 
 def fetch_arxiv_email(lookback):
 	"""
